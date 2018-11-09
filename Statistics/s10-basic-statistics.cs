@@ -10,9 +10,9 @@ namespace Statistics
         public static void Solve(int n, int[] ar)
         {
             //Console.WriteLine("Printing s10_basic_statistics challenge solution");
-            Console.WriteLine("{0:n1}", CalcMean(n, ar));
-            Console.WriteLine("{0:n1}", CalcMedian(n, ar));
-            Console.WriteLine("{0:n0}", CalcMode(n, ar));
+            Console.WriteLine("{0:F1}", CalcMean(n, ar));
+            Console.WriteLine("{0:F1}", CalcMedian(n, ar));
+            Console.WriteLine("{0}", CalcMode(n, ar));
         }
         static decimal CalcMean(int n, int[] ar)
         {
