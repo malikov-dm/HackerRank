@@ -1,0 +1,11 @@
+d:\GitHub\HackerRank\Statistics\obj\Debug\netcoreapp2.0\Statistics.csprojAssemblyReference.cache
+d:\GitHub\HackerRank\Statistics\obj\Debug\netcoreapp2.0\Statistics.csproj.CoreCompileInputs.cache
+d:\GitHub\HackerRank\Statistics\obj\Debug\netcoreapp2.0\Statistics.AssemblyInfoInputs.cache
+d:\GitHub\HackerRank\Statistics\obj\Debug\netcoreapp2.0\Statistics.AssemblyInfo.cs
+d:\GitHub\HackerRank\Statistics\bin\Debug\netcoreapp2.0\Statistics.deps.json
+d:\GitHub\HackerRank\Statistics\bin\Debug\netcoreapp2.0\Statistics.runtimeconfig.json
+d:\GitHub\HackerRank\Statistics\bin\Debug\netcoreapp2.0\Statistics.runtimeconfig.dev.json
+d:\GitHub\HackerRank\Statistics\bin\Debug\netcoreapp2.0\Statistics.dll
+d:\GitHub\HackerRank\Statistics\bin\Debug\netcoreapp2.0\Statistics.pdb
+d:\GitHub\HackerRank\Statistics\obj\Debug\netcoreapp2.0\Statistics.dll
+d:\GitHub\HackerRank\Statistics\obj\Debug\netcoreapp2.0\Statistics.pdb
