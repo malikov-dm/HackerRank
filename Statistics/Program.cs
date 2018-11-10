@@ -12,7 +12,8 @@ namespace Statistics
             //s10_basic_statistics.Solve();
             //s10_weighted_mean.Solve();
             //s10_standard_deviation.Solve();
-            s10_quartiles.Solve();
+            //s10_quartiles.Solve();
+            s10_interquartile_range.Solve();
         }
     }
 }

@@ -10,11 +10,12 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/s10-basic-statistics/bin/Debug/netcoreapp2.0/s10-basic-statistics.dll",
+            "program": "${workspaceFolder}/bin/Debug/netcoreapp2.0/Statistics.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/s10-basic-statistics",
+            "cwd": "${workspaceFolder}",
             // For more information about the 'console' field, see https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window
-            "console": "internalConsole",
+            //"console": "internalConsole",
+            "console": "externalTerminal",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart"
         },

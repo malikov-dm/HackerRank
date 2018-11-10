@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/s10-basic-statistics/s10-basic-statistics.csproj"
+                "${workspaceFolder}/Statistics.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
