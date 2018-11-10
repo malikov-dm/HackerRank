@@ -10,7 +10,8 @@ namespace Statistics
         static void Main(string[] args)
         {
             //s10_basic_statistics.Solve();
-            s10_weighted_mean.Solve();
+            //s10_weighted_mean.Solve();
+            s10_standard_deviation.Solve();
         }
     }
 }

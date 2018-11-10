@@ -9,10 +9,7 @@ namespace Statistics
     {
         public static void Solve()
         {
-            //Console.WriteLine("Input array length");
             int n = Convert.ToInt32(Console.ReadLine());
-
-            //Console.WriteLine("Input array of integers");
             int[] ar = Array.ConvertAll(Console.ReadLine().Split(' '), arTemp => Convert.ToInt32(arTemp));
 
             //Console.WriteLine("Printing s10_basic_statistics challenge solution");
