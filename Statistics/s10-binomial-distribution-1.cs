@@ -9,52 +9,38 @@ namespace Statistics
     {
         public static void Solve()
         {
-            double ratio = 1.09d;
+            double br = 1.09d;
 
-            double br = ratio / (1 + ratio);
+            double gr = 1d;
+
+            double p = br / (br + gr);
 
             double res = 0;
-
-            for (int i = 1; i <= 6; i++)
+            string str = string.Empty;
+            for (int i = 3; i <= 6; i++)
             {
-                for (int j = 1; j <= i & j <= 3; j++)
-                {
-                    //res += (SpecialFunctions.Factorial(i) / (SpecialFunctions.Factorial(j) * SpecialFunctions.Factorial(i - j))) * Math.Pow(br, j) * Math.Pow(1- br, i - j) ;
-                    Console.Write("{0}.{1} ", i, j);
-
-                }
-                Console.WriteLine();
+                res += Binomial(i, 6, p);
             }
-            Console.WriteLine(res);
+            Console.WriteLine("{0:F3}", res);
         }
-    }
-
-    public class Solution
-    {
-        public static double BR = 1.09;
-        public static double GR = 1;
-        static int factorial(int n)
+        static long Fctrl(int n)
         {
             if (n == 0)
                 return 1;
-            return n * factorial(n - 1);
+            return n * Fctrl(n - 1);
         }
 
-        static double combination(int r)
+        static long Combination(int n, int x)
         {
-            return (factorial(6) / (factorial(r) * factorial(6 - r)));
+            return Fctrl(n) / (Fctrl(x) * Fctrl(n - x));
         }
-        public static void Start()
-        {
-            double p = (BR) / (BR + GR);
-            double q = 1 - p;
 
-            double probability = 0.0;
-            for (int i = 6; i >= 3; i--)
-            {
-                probability += combination(i) * Math.Pow(p, i) * Math.Pow(q, 6 - i);
-            }
-            Console.WriteLine("{0:F3}", probability);
+        static double Binomial(int x, int n, double p)
+        {
+            double res = 0;
+            res = Combination(n, x) * Math.Pow(p, x) * Math.Pow(1 - p, n - x);
+            return res;
         }
     }
+
 }
