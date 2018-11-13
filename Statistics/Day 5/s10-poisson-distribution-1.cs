@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using MathNet.Numerics;
+
 namespace Statistics
 {
     class s10_poisson_distribution_1
