@@ -20,7 +20,8 @@ namespace Statistics
             //s10_geometric_distribution_2.Solve();
             //s10_poisson_distribution_1.Solve();
             //s10_poisson_distribution_2.Solve();
-            s10_normal_distribution_1.Solve();
+            //s10_normal_distribution_1.Solve();
+            s10_normal_distribution_2.Solve();
         }
     }
 }
