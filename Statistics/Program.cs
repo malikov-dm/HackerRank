@@ -24,7 +24,8 @@ namespace Statistics
             //s10_normal_distribution_2.Solve();
             //s10_the_central_limit_theorem_1.Solve();
             //s10_the_central_limit_theorem_2.Solve();
-            s10_the_central_limit_theorem_3.Solve();
+            //s10_the_central_limit_theorem_3.Solve();
+            s10_pearson_correlation_coefficient.Solve();
         }
     }
 }
