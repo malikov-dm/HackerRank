@@ -1,0 +1,18 @@
+[
+  {
+    "company_code": "C1",
+    "founder": "Monika",
+    "q1": "1",
+    "q2": "2",
+    "q3": "1",
+    "q4": "2"
+  },
+  {
+    "company_code": "C2",
+    "founder": "Samantha",
+    "q1": "1",
+    "q2": "1",
+    "q3": "2",
+    "q4": "2"
+  }
+]
