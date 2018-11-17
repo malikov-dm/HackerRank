@@ -28,7 +28,8 @@ namespace Statistics
             //s10_pearson_correlation_coefficient.Solve();
             //s10_spearman_rank_correlation_coefficient.Solve();
             //s10_spearman_rank_correlation_coefficient.Solve();
-            s10_least_square_regression_line.Solve();
+            //s10_least_square_regression_line.Solve();
+            s10_multiple_linear_regression.Solve();
         }
     }
 }
