@@ -52,19 +52,6 @@ namespace Statistics
                 }
                 Console.WriteLine("{0:F2}", result);
             }
-            /* for (int i = 0; i < q; i++) {
-                        double result = B[0][0];
-                        for (int row = 1; row < sizeB; row++) {
-                            result += scan.nextDouble() * B[row][0];
-                        }
-                        System.out.println(result);
-                    } */
-            /* Print2DArray(data);
-            Print2DArray(Y);
-            Print2DArray(subs);
-            Print2DArray(B);
-            Console.WriteLine(sizeB); */
-
         }
 
         public static double[,] multiply(double[,] A, double[,] B)
