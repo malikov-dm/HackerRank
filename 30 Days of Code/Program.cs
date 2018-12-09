@@ -6,7 +6,7 @@ namespace _30_Days_of_Code
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("feature branch");
+            Console.WriteLine("Задание 1");
         }
     }
 }
