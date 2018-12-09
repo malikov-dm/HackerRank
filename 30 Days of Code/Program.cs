@@ -6,7 +6,7 @@ namespace _30_Days_of_Code
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Задание 1");
+            Console.WriteLine("Задание 2");
         }
     }
 }
