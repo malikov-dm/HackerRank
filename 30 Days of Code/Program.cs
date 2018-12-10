@@ -12,22 +12,28 @@ using System.Text.RegularExpressions;
 using System.Text;
 using System;
 
-class Solution {
+class Solution
+{
 
-    // Complete the solve function below.
-    static void solve(double meal_cost, int tip_percent, int tax_percent) {
-        var resDouble = meal_cost + meal_cost * tip_percent / 100 + meal_cost * tax_percent / 100;
-        var resInt = Convert.ToInt32(resDouble);
-        Console.WriteLine(resInt);
-    }
 
-    static void Main(string[] args) {
-        double meal_cost = Convert.ToDouble(Console.ReadLine());
 
-        int tip_percent = Convert.ToInt32(Console.ReadLine());
-
-        int tax_percent = Convert.ToInt32(Console.ReadLine());
-
-        solve(meal_cost, tip_percent, tax_percent);
+    static void Main(string[] args)
+    {
+        int N = Convert.ToInt32(Console.ReadLine());
+        if (N == 1 || N % 2 == 1)
+        {
+            Console.WriteLine("Weird");
+        }
+        else if (N >= 2 && N <= 5)
+        {
+            Console.WriteLine("Not Weird");
+        }
+        else if (N >= 6 && N <= 20)
+        {
+            Console.WriteLine("Weird");
+        }
+        else
+            Console.WriteLine("Not Weird");
     }
 }
+
