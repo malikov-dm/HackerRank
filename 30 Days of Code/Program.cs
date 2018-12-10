@@ -1,39 +1,59 @@
-﻿using System.CodeDom.Compiler;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Text.RegularExpressions;
-using System.Text;
-using System;
 
-class Solution
+class Person
 {
-
-
-
-    static void Main(string[] args)
+    public int age;
+    public Person(int initialAge)
     {
-        int N = Convert.ToInt32(Console.ReadLine());
-        if (N == 1 || N % 2 == 1)
+        // Add some more code to run some checks on initialAge
+        if (initialAge < 0)
         {
-            Console.WriteLine("Weird");
-        }
-        else if (N >= 2 && N <= 5)
-        {
-            Console.WriteLine("Not Weird");
-        }
-        else if (N >= 6 && N <= 20)
-        {
-            Console.WriteLine("Weird");
+            Console.WriteLine("Age is not valid, setting age to 0.");
+            age = 0;
         }
         else
-            Console.WriteLine("Not Weird");
+        {
+            age = initialAge;
+        }
+    }
+    public void amIOld()
+    {
+        // Do some computations in here and print out the correct statement to the console 
+        if(age < 13)
+        {
+            Console.WriteLine("You are young.");
+        }
+        else if(age >= 13 && age < 18)
+        {
+            Console.WriteLine("You are a teenager.");
+        }else
+        {
+            Console.WriteLine("You are old.");
+        }
+    }
+
+    public void yearPasses()
+    {
+        // Increment the age of the person in here
+        age++;
+    }
+
+    static void Main(String[] args)
+    {
+        int T = int.Parse(Console.In.ReadLine());
+        for (int i = 0; i < T; i++)
+        {
+            int age = int.Parse(Console.In.ReadLine());
+            Person p = new Person(age);
+            p.amIOld();
+            for (int j = 0; j < 3; j++)
+            {
+                p.yearPasses();
+            }
+            p.amIOld();
+            Console.WriteLine();
+        }
     }
 }
-
