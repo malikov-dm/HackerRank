@@ -12,16 +12,23 @@ using System.Text.RegularExpressions;
 using System.Text;
 using System;
 
-class Solution {
-
-
-
-    static void Main(string[] args) {
+class Solution
+{
+    static void Main(string[] args)
+    {
         int n = Convert.ToInt32(Console.ReadLine());
 
-        for (int i = 1; i <= 10; i++)
+        for (int i = 0; i < n; i++)
         {
-            Console.WriteLine($"{n} x {i} = {{0}}", n * i);
+            string strOdd = string.Empty;
+            string strEven = string.Empty;
+            string input = Console.ReadLine();
+            for (int j = 0; j < input.Length; j++)
+            {
+                var t = j % 2 == 0 ? strEven += input[j] : strOdd += input[j];
+
+            }
+            Console.WriteLine($"{strEven} {strOdd}");
 
         }
     }
