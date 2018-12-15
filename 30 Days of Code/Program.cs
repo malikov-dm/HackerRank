@@ -18,18 +18,10 @@ class Solution
     {
         int n = Convert.ToInt32(Console.ReadLine());
 
-        for (int i = 0; i < n; i++)
-        {
-            string strOdd = string.Empty;
-            string strEven = string.Empty;
-            string input = Console.ReadLine();
-            for (int j = 0; j < input.Length; j++)
-            {
-                var t = j % 2 == 0 ? strEven += input[j] : strOdd += input[j];
+        int[] arr = Array.ConvertAll(Console.ReadLine().Split(' '), arrTemp => Convert.ToInt32(arrTemp));
 
-            }
-            Console.WriteLine($"{strEven} {strOdd}");
+        var res = String.Join(" ", arr.Reverse());
 
-        }
+        Console.WriteLine(res);
     }
 }
