@@ -17,11 +17,22 @@ class Solution
     static void Main(string[] args)
     {
         int n = Convert.ToInt32(Console.ReadLine());
+        IDictionary<string, string> dic = new Dictionary<string, string>();
+        IList<string> list = new List<string>();
 
-        int[] arr = Array.ConvertAll(Console.ReadLine().Split(' '), arrTemp => Convert.ToInt32(arrTemp));
-
-        var res = String.Join(" ", arr.Reverse());
-
-        Console.WriteLine(res);
+        for (int i = 0; i < n; i++)
+        {
+            string[] arr = Console.ReadLine().Split(' ');
+            dic.Add(arr[0], arr[1]);
+        }
+        for (int i = 0; i < n; i++)
+        {
+            var str = Console.ReadLine();
+            if(dic.ContainsKey(str)){
+                Console.WriteLine($"{str}={dic[str]}");
+            }else{
+                Console.WriteLine("Not Found");
+            }
+        }
     }
 }
