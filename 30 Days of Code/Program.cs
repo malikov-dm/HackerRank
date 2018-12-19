@@ -14,29 +14,65 @@ using System;
 
 class Solution
 {
+
+
+
     static void Main(string[] args)
     {
-        int n = Convert.ToInt32(Console.ReadLine());
-        int currentCons = 0;
-        int maxCons = 0;
-        while (n > 0)
+        int[][] arr = new int[6][];
+
+        for (int i = 0; i < 6; i++)
         {
-            var reminder = n % 2;
-            if (reminder > 0)
+            arr[i] = Array.ConvertAll(Console.ReadLine().Split(' '), arrTemp => Convert.ToInt32(arrTemp));
+        }
+
+        int maxSum = Int32.MinValue, currSum = 0;
+
+        int x0 = 0, y0 = 0;
+
+
+        bool flag = true;
+
+        while (flag)
+        {
+            
+            if (x0 + 2 < 6)
             {
-                currentCons++;
-                if (currentCons > maxCons)
-                {
-                    maxCons = currentCons;
-                }
+                //Console.WriteLine($"{arr[y0][x0]} {arr[y0][x0 + 1]} {arr[y0][x0 + 2]}");
+                //Console.WriteLine($"  {arr[y0 + 1][x0 + 1]}  ");
+                //Console.WriteLine($"{arr[y0 + 2][x0]} {arr[y0 + 2][x0 + 1]} {arr[y0 + 2][x0 + 2]}");
+                currSum = arr[y0][x0] + arr[y0][x0 + 1] + arr[y0][x0 + 2] + arr[y0 + 1][x0 + 1] + arr[y0 + 2][x0] + arr[y0 + 2][x0 + 1] + arr[y0 + 2][x0 + 2];
+                //Console.WriteLine();
+                //Console.WriteLine(currSum);
+                //Console.WriteLine();
+                maxSum = currSum > maxSum ? currSum : maxSum;
+                x0++;
             }
             else
             {
-                currentCons = 0;
+                x0 = 0;
+                y0++;
             }
 
-            n /= 2;
+            //Console.WriteLine($"x0 = {x0}, y0 = {y0}");
+
+
+            if (y0 + 2 >= 6) flag = false;
+
+
         }
-        Console.WriteLine(maxCons);
+
+        Console.WriteLine(maxSum);
+
+        /* for (int x = 0; x < 6; x++)
+        {
+            for (int y = 0; y < 6; y++)
+            {
+                Console.Write($"{arr[x][y]} ");
+            }
+
+            Console.WriteLine();
+        } */
+
     }
 }
