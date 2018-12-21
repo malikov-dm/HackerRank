@@ -1,79 +1,47 @@
 ﻿using System;
-using System.Linq;
-
-class Person
+using System.Collections.Generic;
+using System.IO;
+abstract class Book
 {
-    protected string firstName;
-    protected string lastName;
-    protected int id;
 
-    public Person() { }
-    public Person(string firstName, string lastName, int identification)
+    protected String title;
+    protected String author;
+
+    public Book(String t, String a)
     {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.id = identification;
+        title = t;
+        author = a;
     }
-    public void printPerson()
-    {
-        Console.WriteLine("Name: " + lastName + ", " + firstName + "\nID: " + id);
-    }
+    public abstract void display();
+
+
 }
 
-class Student : Person
+//Write MyBook class
+class MyBook : Book
 {
-    private int[] testScores;
-
-    public Student(string firstName, string lastName, int id, int[] scores) : base(firstName, lastName, id)
+    protected int price;
+    public MyBook(string title, string author, int price) : base(title, author)
     {
-        this.testScores = scores;
+        this.price = price;
     }
-    
-    public char Calculate()
+
+    public override void display()
     {
-        var average = testScores.Sum() / testScores.Length;
-        if(average <= 100 && average >= 90)
-        {
-            return 'O';
-        } 
-        if(average < 90 && average >= 80)
-        {
-            return 'E';
-        } 
-        if(average < 80 && average >= 70)
-        {
-            return 'A';
-        } 
-        if(average <= 70 && average >= 55)
-        {
-            return 'P';
-        } 
-        if(average < 55 && average >= 40)
-        {
-            return 'D';
-        }         
-        return 'T';
+        Console.WriteLine($"Title: {title}");
+        Console.WriteLine($"Author: {author}");
+        Console.WriteLine($"Price: {price}");
     }
 }
 
 class Solution
 {
-    static void Main()
+    static void Main(String[] args)
     {
-        string[] inputs = Console.ReadLine().Split();
-        string firstName = inputs[0];
-        string lastName = inputs[1];
-        int id = Convert.ToInt32(inputs[2]);
-        int numScores = Convert.ToInt32(Console.ReadLine());
-        inputs = Console.ReadLine().Split();
-        int[] scores = new int[numScores];
-        for (int i = 0; i < numScores; i++)
-        {
-            scores[i] = Convert.ToInt32(inputs[i]);
-        }
-
-        Student s = new Student(firstName, lastName, id, scores);
-        s.printPerson();
-        Console.WriteLine("Grade: " + s.Calculate() + "\n");
+        String title = Console.ReadLine();
+        String author = Console.ReadLine();
+        int price = Int32.Parse(Console.ReadLine());
+        Book new_novel = new MyBook(title, author, price);
+        new_novel.display();
     }
 }
