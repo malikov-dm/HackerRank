@@ -1,47 +1,56 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-abstract class Book
+using System.Linq;
+
+class Difference
 {
+    private int[] elements;
+    public int maximumDifference;
 
-    protected String title;
-    protected String author;
-
-    public Book(String t, String a)
+    internal int elemntsLen
     {
-        title = t;
-        author = a;
-    }
-    public abstract void display();
-
-
-}
-
-//Write MyBook class
-class MyBook : Book
-{
-    protected int price;
-    public MyBook(string title, string author, int price) : base(title, author)
-    {
-        this.price = price;
+        get
+        {
+            if (elements == null)
+                return 0;
+            return elements.Length;
+        }
     }
 
-    public override void display()
+    public Difference(int[] arr)
     {
-        Console.WriteLine($"Title: {title}");
-        Console.WriteLine($"Author: {author}");
-        Console.WriteLine($"Price: {price}");
+        this.elements = arr;
     }
-}
+
+    internal void computeDifference()
+    {
+        int res = 0;
+        for (int i = 0; i < elemntsLen - 1; i++)
+        {
+            for (int j = i + 1; j < elemntsLen; j++)
+            {
+                var cdiff = Math.Abs(elements[i] - elements[j]);
+                res = res > cdiff ? res : cdiff;
+            }
+        }
+        maximumDifference = res;
+    }
+
+    // Add your code here
+
+} // End of Difference Class
 
 class Solution
 {
-    static void Main(String[] args)
+    static void Main(string[] args)
     {
-        String title = Console.ReadLine();
-        String author = Console.ReadLine();
-        int price = Int32.Parse(Console.ReadLine());
-        Book new_novel = new MyBook(title, author, price);
-        new_novel.display();
+        Convert.ToInt32(Console.ReadLine());
+
+        int[] a = Console.ReadLine().Split(' ').Select(x => Convert.ToInt32(x)).ToArray();
+
+        Difference d = new Difference(a);
+
+        d.computeDifference();
+
+        Console.Write(d.maximumDifference);
     }
 }
