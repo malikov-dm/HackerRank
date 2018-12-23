@@ -1,56 +1,54 @@
 ﻿using System;
-using System.Linq;
-
-class Difference
+class Node
 {
-    private int[] elements;
-    public int maximumDifference;
-
-    internal int elemntsLen
+    public int data;
+    public Node next;
+    public Node(int d)
     {
-        get
-        {
-            if (elements == null)
-                return 0;
-            return elements.Length;
-        }
+        data = d;
+        next = null;
     }
 
-    public Difference(int[] arr)
-    {
-        this.elements = arr;
-    }
-
-    internal void computeDifference()
-    {
-        int res = 0;
-        for (int i = 0; i < elemntsLen - 1; i++)
-        {
-            for (int j = i + 1; j < elemntsLen; j++)
-            {
-                var cdiff = Math.Abs(elements[i] - elements[j]);
-                res = res > cdiff ? res : cdiff;
-            }
-        }
-        maximumDifference = res;
-    }
-
-    // Add your code here
-
-} // End of Difference Class
-
+}
 class Solution
 {
-    static void Main(string[] args)
+
+    public static Node insert(Node head, int data)
     {
-        Convert.ToInt32(Console.ReadLine());
+        if (head == null)
+        {
+            return new Node(data);
+        }
+        else if (head.next == null)
+        {
+            head.next = new Node(data);
+        }
+        else
+        {
+            insert(head.next, data);
+        }
+        return head;
+    }
 
-        int[] a = Console.ReadLine().Split(' ').Select(x => Convert.ToInt32(x)).ToArray();
+    public static void display(Node head)
+    {
+        Node start = head;
+        while (start != null)
+        {
+            Console.Write(start.data + " ");
+            start = start.next;
+        }
+    }
+    static void Main(String[] args)
+    {
 
-        Difference d = new Difference(a);
-
-        d.computeDifference();
-
-        Console.Write(d.maximumDifference);
+        Node head = null;
+        int T = Int32.Parse(Console.ReadLine());
+        while (T-- > 0)
+        {
+            int data = Int32.Parse(Console.ReadLine());
+            head = insert(head, data);
+        }
+        display(head);
     }
 }
