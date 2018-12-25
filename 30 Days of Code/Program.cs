@@ -21,6 +21,10 @@ class Solution
 {
     static void Main(String[] args)
     {
+#if DEBUG
+            Console.SetIn(File.OpenText("input.txt"));
+#endif
+
         Calculator myCalculator = new Calculator();
         int T = Int32.Parse(Console.ReadLine());
         while (T-- > 0)
@@ -39,9 +43,6 @@ class Solution
 
             }
         }
-
-
-
     }
 }
 
