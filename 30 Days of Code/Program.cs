@@ -1,43 +1,40 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
-
-class Printer
+using System.Linq;
+class Solution
 {
 
-    /**
-	*    Name: PrintArray
-	*    Print each element of the generic array on a new line. Do not return anything.
-	*    @param A generic array
-	**/
-    private static void PrintArray<T>(T[] intArray)
+    static void Main(String[] args)
     {
-        foreach(var t in intArray)
-        {
-            Console.WriteLine(t);
-        }
-    }
-    static void Main(string[] args)
-    {
-        #if DEBUG
+#if DEBUG
         Console.SetIn(File.OpenText("input.txt"));
-        #endif
+#endif
         int n = Convert.ToInt32(Console.ReadLine());
-        int[] intArray = new int[n];
+        string[] a_temp = Console.ReadLine().Split(' ');
+        int[] a = Array.ConvertAll(a_temp, Int32.Parse);
+
+        int numSwaps = 0;
+
         for (int i = 0; i < n; i++)
         {
-            intArray[i] = Convert.ToInt32(Console.ReadLine());
+            for (int j = i + 1; j < n; j++)
+            {
+                if (a[i] > a[j])
+                {
+                    var t = a[i];
+                    a[i] = a[j];
+                    a[j] = t;
+                    numSwaps++;
+                }
+            }
         }
+        int firstElement = a[0];
+        int lastElement = a[n - 1];
 
-        n = Convert.ToInt32(Console.ReadLine());
-        string[] stringArray = new string[n];
-        for (int i = 0; i < n; i++)
-        {
-            stringArray[i] = Console.ReadLine();
-        }
-
-        PrintArray<Int32>(intArray);
-        PrintArray<String>(stringArray);
+        Console.WriteLine($"Array is sorted in {numSwaps} swaps.");
+        Console.WriteLine($"First Element: {firstElement}");
+        Console.WriteLine($"Last Element: {lastElement}");
     }
-
-
 }
+
