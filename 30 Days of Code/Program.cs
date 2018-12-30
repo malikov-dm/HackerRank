@@ -1,63 +1,43 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 
-class Solution {
-    Stack<char> s = new Stack<char>();
-    Queue<char> q = new Queue<char>();
-    private char dequeueCharacter()
-    {
-        return q.Dequeue();
-    }
+class Printer
+{
 
-    private char popCharacter()
+    /**
+	*    Name: PrintArray
+	*    Print each element of the generic array on a new line. Do not return anything.
+	*    @param A generic array
+	**/
+    private static void PrintArray<T>(T[] intArray)
     {
-        return s.Pop();
+        foreach(var t in intArray)
+        {
+            Console.WriteLine(t);
+        }
     }
-       private void enqueueCharacter(char c)
+    static void Main(string[] args)
     {
-        q.Enqueue(c);
-    }
-
-    private void pushCharacter(char c)
-    {
-        s.Push(c);
-    }
-
-    static void Main(String[] args) {
         #if DEBUG
         Console.SetIn(File.OpenText("input.txt"));
         #endif
-        // read the string s.
-        string s = Console.ReadLine();
-        
-        // create the Solution class object p.
-        Solution obj = new Solution();
-        
-        // push/enqueue all the characters of string s to stack.
-        foreach (char c in s) {
-            obj.pushCharacter(c);
-            obj.enqueueCharacter(c);
+        int n = Convert.ToInt32(Console.ReadLine());
+        int[] intArray = new int[n];
+        for (int i = 0; i < n; i++)
+        {
+            intArray[i] = Convert.ToInt32(Console.ReadLine());
         }
-        
-        bool isPalindrome = true;
-        
-        // pop the top character from stack.
-        // dequeue the first character from queue.
-        // compare both the characters.
-        for (int i = 0; i < s.Length / 2; i++) {
-            if (obj.popCharacter() != obj.dequeueCharacter()) {
-                isPalindrome = false;
-                
-                break;
-            }
+
+        n = Convert.ToInt32(Console.ReadLine());
+        string[] stringArray = new string[n];
+        for (int i = 0; i < n; i++)
+        {
+            stringArray[i] = Console.ReadLine();
         }
-        
-        // finally print whether string s is palindrome or not.
-        if (isPalindrome) {
-            Console.Write("The word, {0}, is a palindrome.", s);
-        } else {
-            Console.Write("The word, {0}, is not a palindrome.", s);
-        }
+
+        PrintArray<Int32>(intArray);
+        PrintArray<String>(stringArray);
     }
+
+
 }
