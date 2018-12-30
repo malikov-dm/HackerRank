@@ -2,20 +2,26 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
-internal class Calculator
+public interface AdvancedArithmetic{
+    int divisorSum(int n);
+}
+public class Calculator : AdvancedArithmetic
 {
-    internal int power(int p, int n)
+    public int divisorSum(int n)
     {
-        if (p < 0 || n < 0)
+        var res = 0;
+        for(int i = 1; i <= n / 2; i++)
         {
-            throw new Exception("n and p should be non-negative");
+            if(n % i == 0)
+            {
+                res += i;
+            }
         }
-        return (int)Math.Pow(p, n);
+
+        res += n;
+        return res;
     }
 }
-
-//Write your code here
 
 class Solution
 {
@@ -25,24 +31,10 @@ class Solution
             Console.SetIn(File.OpenText("input.txt"));
 #endif
 
-        Calculator myCalculator = new Calculator();
-        int T = Int32.Parse(Console.ReadLine());
-        while (T-- > 0)
-        {
-            string[] num = Console.ReadLine().Split();
-            int n = int.Parse(num[0]);
-            int p = int.Parse(num[1]);
-            try
-            {
-                int ans = myCalculator.power(n, p);
-                Console.WriteLine(ans);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-
-            }
-        }
+        int n = Int32.Parse(Console.ReadLine());
+      	AdvancedArithmetic myCalculator = new Calculator();
+        int sum = myCalculator.divisorSum(n);
+        Console.WriteLine("I implemented: AdvancedArithmetic\n" + sum); 
     }
 }
 
