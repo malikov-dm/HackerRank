@@ -1,40 +1,63 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-public interface AdvancedArithmetic{
-    int divisorSum(int n);
-}
-public class Calculator : AdvancedArithmetic
-{
-    public int divisorSum(int n)
+
+class Solution {
+    Stack<char> s = new Stack<char>();
+    Queue<char> q = new Queue<char>();
+    private char dequeueCharacter()
     {
-        var res = 0;
-        for(int i = 1; i <= n / 2; i++)
-        {
-            if(n % i == 0)
-            {
-                res += i;
+        return q.Dequeue();
+    }
+
+    private char popCharacter()
+    {
+        return s.Pop();
+    }
+       private void enqueueCharacter(char c)
+    {
+        q.Enqueue(c);
+    }
+
+    private void pushCharacter(char c)
+    {
+        s.Push(c);
+    }
+
+    static void Main(String[] args) {
+        #if DEBUG
+        Console.SetIn(File.OpenText("input.txt"));
+        #endif
+        // read the string s.
+        string s = Console.ReadLine();
+        
+        // create the Solution class object p.
+        Solution obj = new Solution();
+        
+        // push/enqueue all the characters of string s to stack.
+        foreach (char c in s) {
+            obj.pushCharacter(c);
+            obj.enqueueCharacter(c);
+        }
+        
+        bool isPalindrome = true;
+        
+        // pop the top character from stack.
+        // dequeue the first character from queue.
+        // compare both the characters.
+        for (int i = 0; i < s.Length / 2; i++) {
+            if (obj.popCharacter() != obj.dequeueCharacter()) {
+                isPalindrome = false;
+                
+                break;
             }
         }
-
-        res += n;
-        return res;
+        
+        // finally print whether string s is palindrome or not.
+        if (isPalindrome) {
+            Console.Write("The word, {0}, is a palindrome.", s);
+        } else {
+            Console.Write("The word, {0}, is not a palindrome.", s);
+        }
     }
 }
-
-class Solution
-{
-    static void Main(String[] args)
-    {
-#if DEBUG
-            Console.SetIn(File.OpenText("input.txt"));
-#endif
-
-        int n = Int32.Parse(Console.ReadLine());
-      	AdvancedArithmetic myCalculator = new Calculator();
-        int sum = myCalculator.divisorSum(n);
-        Console.WriteLine("I implemented: AdvancedArithmetic\n" + sum); 
-    }
-}
-
