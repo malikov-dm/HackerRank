@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
-
+using System.Linq;
 class Node
 {
     public Node left, right;
@@ -13,13 +15,28 @@ class Node
 }
 class Solution
 {
-
-    static int getHeight(Node root)
+    static Queue queue = new Queue();
+    static void levelOrder(Node root)
     {
-        if (root == null) return -1;
-        return 1 + Math.Max(getHeight(root.left), getHeight(root.right));
+        //Write your code here
+        if (null != root)
+        {
+            queue.Enqueue(root);
+            while (queue.Count > 0)
+            {
+                var n = (Node)queue.Dequeue();
+                Console.Write($"{n.data} ");
+                if(n.left != null)
+                {
+                    queue.Enqueue(n.left);
+                }
+                if(n.right != null)
+                {
+                    queue.Enqueue(n.right);
+                }
+            }
+        }
     }
-
     static Node insert(Node root, int data)
     {
         if (root == null)
@@ -55,8 +72,6 @@ class Solution
             int data = Int32.Parse(Console.ReadLine());
             root = insert(root, data);
         }
-        int height = getHeight(root);
-        Console.WriteLine(height);
-
+        levelOrder(root);
     }
 }
