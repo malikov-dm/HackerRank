@@ -1,40 +1,62 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+
+class Node
+{
+    public Node left, right;
+    public int data;
+    public Node(int data)
+    {
+        this.data = data;
+        left = right = null;
+    }
+}
 class Solution
 {
 
+    static int getHeight(Node root)
+    {
+        if (root == null) return -1;
+        return 1 + Math.Max(getHeight(root.left), getHeight(root.right));
+    }
+
+    static Node insert(Node root, int data)
+    {
+        if (root == null)
+        {
+            return new Node(data);
+        }
+        else
+        {
+            Node cur;
+            if (data <= root.data)
+            {
+                cur = insert(root.left, data);
+                root.left = cur;
+            }
+            else
+            {
+                cur = insert(root.right, data);
+                root.right = cur;
+            }
+            return root;
+        }
+    }
     static void Main(String[] args)
     {
 #if DEBUG
         Console.SetIn(File.OpenText("input.txt"));
 #endif
-        int n = Convert.ToInt32(Console.ReadLine());
-        string[] a_temp = Console.ReadLine().Split(' ');
-        int[] a = Array.ConvertAll(a_temp, Int32.Parse);
 
-        int numSwaps = 0;
-
-        for (int i = 0; i < n; i++)
+        Node root = null;
+        int T = Int32.Parse(Console.ReadLine());
+        while (T-- > 0)
         {
-            for (int j = i + 1; j < n; j++)
-            {
-                if (a[i] > a[j])
-                {
-                    var t = a[i];
-                    a[i] = a[j];
-                    a[j] = t;
-                    numSwaps++;
-                }
-            }
+            int data = Int32.Parse(Console.ReadLine());
+            root = insert(root, data);
         }
-        int firstElement = a[0];
-        int lastElement = a[n - 1];
+        int height = getHeight(root);
+        Console.WriteLine(height);
 
-        Console.WriteLine($"Array is sorted in {numSwaps} swaps.");
-        Console.WriteLine($"First Element: {firstElement}");
-        Console.WriteLine($"Last Element: {lastElement}");
     }
 }
-
