@@ -1,62 +1,67 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+
 class Node
 {
-    public Node left, right;
     public int data;
-    public Node(int data)
+    public Node next;
+    public Node(int d)
     {
-        this.data = data;
-        left = right = null;
+        data = d;
+        next = null;
     }
+
 }
 class Solution
 {
-    static Queue queue = new Queue();
-    static void levelOrder(Node root)
+
+    public static Node removeDuplicates(Node head)
     {
-        //Write your code here
-        if (null != root)
+        if (head == null || head.next == null)
         {
-            queue.Enqueue(root);
-            while (queue.Count > 0)
-            {
-                var n = (Node)queue.Dequeue();
-                Console.Write($"{n.data} ");
-                if(n.left != null)
-                {
-                    queue.Enqueue(n.left);
-                }
-                if(n.right != null)
-                {
-                    queue.Enqueue(n.right);
-                }
-            }
+            return head;
         }
-    }
-    static Node insert(Node root, int data)
-    {
-        if (root == null)
+        if (head.data == head.next.data)
         {
-            return new Node(data);
+            head.next = head.next.next;
+            removeDuplicates(head);
         }
         else
         {
-            Node cur;
-            if (data <= root.data)
-            {
-                cur = insert(root.left, data);
-                root.left = cur;
-            }
-            else
-            {
-                cur = insert(root.right, data);
-                root.right = cur;
-            }
-            return root;
+            removeDuplicates(head.next);
+        }
+
+
+        return head;
+    }
+
+    public static Node insert(Node head, int data)
+    {
+        Node p = new Node(data);
+
+
+        if (head == null)
+            head = p;
+        else if (head.next == null)
+            head.next = p;
+        else
+        {
+            Node start = head;
+            while (start.next != null)
+                start = start.next;
+            start.next = p;
+
+        }
+        return head;
+    }
+    public static void display(Node head)
+    {
+        Node start = head;
+        while (start != null)
+        {
+            Console.Write(start.data + " ");
+            start = start.next;
         }
     }
     static void Main(String[] args)
@@ -65,13 +70,14 @@ class Solution
         Console.SetIn(File.OpenText("input.txt"));
 #endif
 
-        Node root = null;
+        Node head = null;
         int T = Int32.Parse(Console.ReadLine());
         while (T-- > 0)
         {
             int data = Int32.Parse(Console.ReadLine());
-            root = insert(root, data);
+            head = insert(head, data);
         }
-        levelOrder(root);
+        head = removeDuplicates(head);
+        display(head);
     }
 }
