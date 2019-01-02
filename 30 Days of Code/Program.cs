@@ -1,83 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-
-class Node
-{
-    public int data;
-    public Node next;
-    public Node(int d)
-    {
-        data = d;
-        next = null;
-    }
-
-}
 class Solution
 {
-
-    public static Node removeDuplicates(Node head)
-    {
-        if (head == null || head.next == null)
-        {
-            return head;
-        }
-        if (head.data == head.next.data)
-        {
-            head.next = head.next.next;
-            removeDuplicates(head);
-        }
-        else
-        {
-            removeDuplicates(head.next);
-        }
-
-
-        return head;
-    }
-
-    public static Node insert(Node head, int data)
-    {
-        Node p = new Node(data);
-
-
-        if (head == null)
-            head = p;
-        else if (head.next == null)
-            head.next = p;
-        else
-        {
-            Node start = head;
-            while (start.next != null)
-                start = start.next;
-            start.next = p;
-
-        }
-        return head;
-    }
-    public static void display(Node head)
-    {
-        Node start = head;
-        while (start != null)
-        {
-            Console.Write(start.data + " ");
-            start = start.next;
-        }
-    }
     static void Main(String[] args)
     {
 #if DEBUG
         Console.SetIn(File.OpenText("input.txt"));
 #endif
 
-        Node head = null;
-        int T = Int32.Parse(Console.ReadLine());
-        while (T-- > 0)
+        var t = Convert.ToInt32(Console.ReadLine());
+
+        while (t-- > 0)
         {
-            int data = Int32.Parse(Console.ReadLine());
-            head = insert(head, data);
+            var n = Convert.ToInt32(Console.ReadLine());
+            var res = CheckPrime(n);
+            Console.WriteLine(res);
         }
-        head = removeDuplicates(head);
-        display(head);
+    }
+
+    static string CheckPrime(int n)
+    {
+        if (n == 2)
+        {
+            return "Prime";
+        }
+        else if (n == 1 || n % 2 == 0)
+        {
+            return "Not prime";
+        }
+        
+
+        for (int i = 3; i <= Math.Sqrt(n); i += 2)
+        {
+            if (n % i == 0)
+            {
+                return "Not prime";
+            }
+        }
+
+        return "Prime";
     }
 }
+
