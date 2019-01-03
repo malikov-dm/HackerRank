@@ -9,37 +9,39 @@ class Solution
         Console.SetIn(File.OpenText("input.txt"));
 #endif
 
-        var t = Convert.ToInt32(Console.ReadLine());
+        var t1s = Console.ReadLine();
+        var t2s = Console.ReadLine();
+        DateTime dt1 = TryParseDate(t1s);
+        DateTime dt2 = TryParseDate(t2s);
 
-        while (t-- > 0)
+        if (dt1 < dt2 || (dt1 - dt2).TotalDays == 0)
         {
-            var n = Convert.ToInt32(Console.ReadLine());
-            var res = CheckPrime(n);
-            Console.WriteLine(res);
+            Console.WriteLine(0);
         }
-    }
-
-    static string CheckPrime(int n)
-    {
-        if (n == 2)
+        else
         {
-            return "Prime";
-        }
-        else if (n == 1 || n % 2 == 0)
-        {
-            return "Not prime";
-        }
-        
-
-        for (int i = 3; i <= Math.Sqrt(n); i += 2)
-        {
-            if (n % i == 0)
+            if (dt1.Month == dt2.Month && dt1.Year == dt2.Year)
             {
-                return "Not prime";
+                Console.WriteLine((dt1 - dt2).TotalDays * 15);
+            }
+            else if (dt1.Year == dt2.Year)
+            {
+                Console.WriteLine((dt1.Month - dt2.Month) * 500);
+            }
+            else
+            {
+                Console.WriteLine(10000);
             }
         }
 
-        return "Prime";
+
+    }
+
+    static DateTime TryParseDate(string s)
+    {
+
+        int[] ar = Array.ConvertAll(s.Split(' '), t => Convert.ToInt32(t));
+        var dt = new DateTime(ar[2], ar[1], ar[0]);
+        return dt;
     }
 }
-
