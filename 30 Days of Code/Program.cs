@@ -1,47 +1,128 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-class Solution
+using System.Linq;
+
+public class Solution
 {
-    static void Main(String[] args)
+
+    public static int minimum_index(int[] seq)
     {
-#if DEBUG
-        Console.SetIn(File.OpenText("input.txt"));
-#endif
-
-        var t1s = Console.ReadLine();
-        var t2s = Console.ReadLine();
-        DateTime dt1 = TryParseDate(t1s);
-        DateTime dt2 = TryParseDate(t2s);
-
-        if (dt1 < dt2 || (dt1 - dt2).TotalDays == 0)
+        if (seq.Length == 0)
         {
-            Console.WriteLine(0);
+            throw new ArgumentException("Cannot get the minimum value index from an empty sequence");
         }
-        else
+        int min_idx = 0;
+        for (int i = 1; i < seq.Length; ++i)
         {
-            if (dt1.Month == dt2.Month && dt1.Year == dt2.Year)
+            if (seq[i] < seq[min_idx])
             {
-                Console.WriteLine((dt1 - dt2).TotalDays * 15);
-            }
-            else if (dt1.Year == dt2.Year)
-            {
-                Console.WriteLine((dt1.Month - dt2.Month) * 500);
-            }
-            else
-            {
-                Console.WriteLine(10000);
+                min_idx = i;
             }
         }
-
-
+        return min_idx;
     }
 
-    static DateTime TryParseDate(string s)
+    static class TestDataEmptyArray
     {
+        public static int[] get_array()
+        {
+            return new int[] { };
+        }
+    }
 
-        int[] ar = Array.ConvertAll(s.Split(' '), t => Convert.ToInt32(t));
-        var dt = new DateTime(ar[2], ar[1], ar[0]);
-        return dt;
+    static class TestDataUniqueValues
+    {
+        public static int[] get_array()
+        {
+            return new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        }
+
+        public static int get_expected_result()
+        {
+            return 0;
+        }
+    }
+
+    static class TestDataExactlyTwoDifferentMinimums
+    {
+        public static int[] get_array()
+        {
+            return new int[] { 3, 2, 3, 1, 1, 6, 7, 8, 9, 10 };
+        }
+
+        public static int get_expected_result()
+        {
+            return 3;
+        }
+    }
+    public static void TestWithEmptyArray()
+    {
+        try
+        {
+            int[] seq = TestDataEmptyArray.get_array();
+            int result = minimum_index(seq);
+        }
+        catch (ArgumentException)
+        {
+            return;
+        }
+        throw new InvalidOperationException("Exception wasn't thrown as expected");
+    }
+
+    public static void TestWithUniqueValues()
+    {
+        int[] seq = TestDataUniqueValues.get_array();
+        if (seq.Length < 2)
+        {
+            throw new InvalidOperationException("less than 2 elements in the array");
+        }
+
+        int[] tmp = new int[seq.Length];
+        for (int i = 0; i < seq.Length; ++i)
+        {
+            tmp[i] = Convert.ToInt32(seq[i]);
+        }
+        if (!((new LinkedList<int>(tmp.ToList())).Count() == seq.Length))
+        {
+            throw new InvalidOperationException("not all values are unique");
+        }
+
+        int expected_result = TestDataUniqueValues.get_expected_result();
+        int result = minimum_index(seq);
+        if (result != expected_result)
+        {
+            throw new InvalidOperationException("result is different than the expected result");
+        }
+    }
+
+    public static void TestWithExactlyTwoDifferentMinimums()
+    {
+        int[] seq = TestDataExactlyTwoDifferentMinimums.get_array();
+        if (seq.Length < 2)
+        {
+            throw new InvalidOperationException("less than 2 elements in the array");
+        }
+
+        int[] tmp = (int[])seq.Clone();
+        Array.Sort(tmp);
+        if (!(tmp[0] == tmp[1] && (tmp.Length == 2 || tmp[1] < tmp[2])))
+        {
+            throw new InvalidOperationException("there are not exactly two minimums in the array");
+        }
+
+        int expected_result = TestDataExactlyTwoDifferentMinimums.get_expected_result();
+        int result = minimum_index(seq);
+        if (result != expected_result)
+        {
+            throw new InvalidOperationException("result is different than the expected result");
+        }
+    }
+
+    public static void Main(String[] args)
+    {
+        TestWithEmptyArray();
+        TestWithUniqueValues();
+        TestWithExactlyTwoDifferentMinimums();
+        Console.WriteLine("OK");
     }
 }
