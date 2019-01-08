@@ -14,39 +14,37 @@ using System;
 
 class Solution
 {
-
-
-
     static void Main(string[] args)
     {
 #if DEBUG
         Console.SetIn(File.OpenText("input.txt"));
+        FileStream filestream = new FileStream("output.txt", FileMode.OpenOrCreate);
+        var streamwriter = new StreamWriter(filestream);
+        streamwriter.AutoFlush = true;
+        Console.SetOut(streamwriter);
+        Console.SetError(streamwriter);
 #endif
+        int t = Convert.ToInt32(Console.ReadLine());
 
-        int N = Convert.ToInt32(Console.ReadLine());
-
-        string pattern = "[a-z]@gmail.com";
-
-        var list = new List<String>();
-
-        for (int NItr = 0; NItr < N; NItr++)
+        for (int tItr = 0; tItr < t; tItr++)
         {
-            string[] firstNameEmailID = Console.ReadLine().Split(' ');
+            string[] nk = Console.ReadLine().Split(' ');
 
-            string firstName = firstNameEmailID[0];
+            int n = Convert.ToInt32(nk[0]);
 
-            string emailID = firstNameEmailID[1];
+            int k = Convert.ToInt32(nk[1]);
 
-            Match m = Regex.Match(emailID, pattern, RegexOptions.IgnoreCase);
-            if (m.Success)
+            int maxSum = 0;
+            for (int a = 1; a <= n - 1; a++)
             {
-               list.Add(firstName);
+                for (int b = a + 1; b <= n; b++)
+                {
+                    var s = a & b;
+                    maxSum = s > maxSum & s < k ? s : maxSum;
+                }
             }
+
+            Console.WriteLine(maxSum);
         }
-
-        list.Sort();
-
-        foreach(var str in list)
-            Console.WriteLine(str);
     }
 }
