@@ -1,128 +1,52 @@
-﻿using System;
+﻿using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.Collections;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Text.RegularExpressions;
+using System.Text;
+using System;
 
-public class Solution
+class Solution
 {
 
-    public static int minimum_index(int[] seq)
+
+
+    static void Main(string[] args)
     {
-        if (seq.Length == 0)
+#if DEBUG
+        Console.SetIn(File.OpenText("input.txt"));
+#endif
+
+        int N = Convert.ToInt32(Console.ReadLine());
+
+        string pattern = "[a-z]@gmail.com";
+
+        var list = new List<String>();
+
+        for (int NItr = 0; NItr < N; NItr++)
         {
-            throw new ArgumentException("Cannot get the minimum value index from an empty sequence");
-        }
-        int min_idx = 0;
-        for (int i = 1; i < seq.Length; ++i)
-        {
-            if (seq[i] < seq[min_idx])
+            string[] firstNameEmailID = Console.ReadLine().Split(' ');
+
+            string firstName = firstNameEmailID[0];
+
+            string emailID = firstNameEmailID[1];
+
+            Match m = Regex.Match(emailID, pattern, RegexOptions.IgnoreCase);
+            if (m.Success)
             {
-                min_idx = i;
+               list.Add(firstName);
             }
         }
-        return min_idx;
-    }
 
-    static class TestDataEmptyArray
-    {
-        public static int[] get_array()
-        {
-            return new int[] { };
-        }
-    }
+        list.Sort();
 
-    static class TestDataUniqueValues
-    {
-        public static int[] get_array()
-        {
-            return new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-        }
-
-        public static int get_expected_result()
-        {
-            return 0;
-        }
-    }
-
-    static class TestDataExactlyTwoDifferentMinimums
-    {
-        public static int[] get_array()
-        {
-            return new int[] { 3, 2, 3, 1, 1, 6, 7, 8, 9, 10 };
-        }
-
-        public static int get_expected_result()
-        {
-            return 3;
-        }
-    }
-    public static void TestWithEmptyArray()
-    {
-        try
-        {
-            int[] seq = TestDataEmptyArray.get_array();
-            int result = minimum_index(seq);
-        }
-        catch (ArgumentException)
-        {
-            return;
-        }
-        throw new InvalidOperationException("Exception wasn't thrown as expected");
-    }
-
-    public static void TestWithUniqueValues()
-    {
-        int[] seq = TestDataUniqueValues.get_array();
-        if (seq.Length < 2)
-        {
-            throw new InvalidOperationException("less than 2 elements in the array");
-        }
-
-        int[] tmp = new int[seq.Length];
-        for (int i = 0; i < seq.Length; ++i)
-        {
-            tmp[i] = Convert.ToInt32(seq[i]);
-        }
-        if (!((new LinkedList<int>(tmp.ToList())).Count() == seq.Length))
-        {
-            throw new InvalidOperationException("not all values are unique");
-        }
-
-        int expected_result = TestDataUniqueValues.get_expected_result();
-        int result = minimum_index(seq);
-        if (result != expected_result)
-        {
-            throw new InvalidOperationException("result is different than the expected result");
-        }
-    }
-
-    public static void TestWithExactlyTwoDifferentMinimums()
-    {
-        int[] seq = TestDataExactlyTwoDifferentMinimums.get_array();
-        if (seq.Length < 2)
-        {
-            throw new InvalidOperationException("less than 2 elements in the array");
-        }
-
-        int[] tmp = (int[])seq.Clone();
-        Array.Sort(tmp);
-        if (!(tmp[0] == tmp[1] && (tmp.Length == 2 || tmp[1] < tmp[2])))
-        {
-            throw new InvalidOperationException("there are not exactly two minimums in the array");
-        }
-
-        int expected_result = TestDataExactlyTwoDifferentMinimums.get_expected_result();
-        int result = minimum_index(seq);
-        if (result != expected_result)
-        {
-            throw new InvalidOperationException("result is different than the expected result");
-        }
-    }
-
-    public static void Main(String[] args)
-    {
-        TestWithEmptyArray();
-        TestWithUniqueValues();
-        TestWithExactlyTwoDifferentMinimums();
-        Console.WriteLine("OK");
+        foreach(var str in list)
+            Console.WriteLine(str);
     }
 }
