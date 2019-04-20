@@ -44,7 +44,7 @@ namespace ServiceTitan.ProblemOne
 
             }
             visited.Add(originalObject, cloneObject);
-            CopyFields(originalObject, visited, cloneObject, typeToReflect);
+            //CopyFields(originalObject, visited, cloneObject, typeToReflect);
             CopyProperties(originalObject, visited, cloneObject, typeToReflect);
             //RecursiveCopyBaseTypePrivateFields(originalObject, visited, cloneObject, typeToReflect);
             return cloneObject;
@@ -72,6 +72,7 @@ namespace ServiceTitan.ProblemOne
         }
         private static void CopyProperties(object originalObject, IDictionary<object, object> visited, object cloneObject, Type typeToReflect, BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.FlattenHierarchy, Func<PropertyInfo, bool> filter = null)
         {
+            if (typeToReflect.IsArray) return;
             foreach (PropertyInfo propertyInfo in typeToReflect.GetProperties(bindingFlags))
             {
                 if (filter != null && filter(propertyInfo) == false) continue;
@@ -83,6 +84,11 @@ namespace ServiceTitan.ProblemOne
                         case CloningMode.Ignore:
                             {
                                 propertyInfo.SetValue(cloneObject, null);
+                                break;
+                            }
+                        case CloningMode.Shallow:
+                            {
+                                propertyInfo.SetValue(cloneObject, propertyInfo.GetValue(originalObject));
                                 break;
                             }
                         default:

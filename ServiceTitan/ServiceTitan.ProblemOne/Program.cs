@@ -121,7 +121,7 @@ namespace ServiceTitan.ProblemOne
             sw.Start();
             test();
             sw.Stop();
-            // Console.WriteLine($"{title}: {sw.Elapsed.TotalMilliseconds:0.000}ms");
+            Console.WriteLine($"{title}: {sw.Elapsed.TotalMilliseconds:0.000}ms");
         }
 
         public void SimpleTest()
