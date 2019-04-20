@@ -4,6 +4,7 @@ using System;
 using ServiceTitan.ProblemOne.ArrayExtensions;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Collections;
 
 namespace ServiceTitan.ProblemOne
 {
@@ -72,7 +73,7 @@ namespace ServiceTitan.ProblemOne
         }
         private static void CopyProperties(object originalObject, IDictionary<object, object> visited, object cloneObject, Type typeToReflect, BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.FlattenHierarchy, Func<PropertyInfo, bool> filter = null)
         {
-            if (typeToReflect.IsArray) return;
+            if (typeToReflect.IsArray || typeToReflect.IsEnumerableType()) return;
             foreach (PropertyInfo propertyInfo in typeToReflect.GetProperties(bindingFlags))
             {
                 if (filter != null && filter(propertyInfo) == false) continue;
@@ -126,6 +127,11 @@ namespace ServiceTitan.ProblemOne
             }
 
             return null;
+        }
+
+        private static bool IsEnumerableType(this Type type)
+        {
+            return (type.GetInterface(nameof(IEnumerable)) != null);
         }
     }
 

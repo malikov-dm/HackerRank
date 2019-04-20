@@ -175,6 +175,7 @@ namespace ServiceTitan.ProblemOne
         {
             var s = new Node();
             s.Left = s;
+            //var cnt = s.TotalNodeCount;
             var c = Cloner.Clone(s);
             Assert(s != c);
             Assert(null == c.Right);
@@ -287,7 +288,10 @@ namespace ServiceTitan.ProblemOne
         public void RunAllTests()
         {
             foreach (var test in AllTests)
+            {
                 test.Invoke();
+                Console.WriteLine($"{test.Method.Name} passed");
+            }
             Console.WriteLine("Done.");
         }
     }
@@ -297,6 +301,7 @@ namespace ServiceTitan.ProblemOne
         public static void Main(string[] args)
         {
             var cloningServiceTest = new CloningServiceTest();
+            //cloningServiceTest.RunAllTests();
             var allTests = cloningServiceTest.AllTests;
             while (true)
             {
